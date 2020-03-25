@@ -1,0 +1,6 @@
+[submodule "advanca-node"]
+	path = advanca-node
+	url = https://github.com/advanca/advanca-node.git
+[submodule "advanca-worker"]
+	path = advanca-worker
+	url = https://github.com/advanca/advanca-worker.git

@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+  node:
+    build:
+      context: advanca-node
+      dockerfile: Dockerfile
+    ports:
+      - 30333:30333
+      - 9933:9933
+      - 9944:9944
+    image: advanca-node:latest
+    command:
+      - --dev
+      - --ws-external
+  client:
+    build:
+      context: .
+      dockerfile: worker.Dockerfile
+      target: client
+    image: advanca-client:latest
+    command:
+      - --ws-url=ws://node:9944
+  worker:
+    build:
+      context: .
+      dockerfile: worker.Dockerfile
+      target: worker
+    image: advanca-worker:latest
+    command:
+      - --grpc-external-url=worker:12345
+      - --ws-url=ws://node:9944

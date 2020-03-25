@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  node:
+    ports:
+      - 30333:30333
+      - 9933:9933
+      - 9944:9944
+    image: advanca/advanca-node:latest
+    command:
+      - --dev
+      - --ws-external
+  client:
+    image: advanca/advanca-client:latest
+    command:
+      - --ws-url=ws://node:9944
+  worker:
+    image: advanca/advanca-worker:latest
+    command:
+      - --grpc-external-url=worker:12345
+      - --ws-url=ws://node:9944
