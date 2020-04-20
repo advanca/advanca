@@ -1,8 +1,9 @@
+# This is for development usage.
 version: '3.4'
 services:
   node:
     build:
-      context: advanca-node
+      context: ../advanca-node
       dockerfile: Dockerfile
     ports:
       - 30333:30333
@@ -14,7 +15,7 @@ services:
       - --ws-external
   client:
     build:
-      context: advanca-worker
+      context: ../advanca-worker
       dockerfile: Dockerfile
       target: client
     image: advanca-client:latest
@@ -22,7 +23,7 @@ services:
       - --ws-url=ws://node:9944
   worker:
     build:
-      context: advanca-worker
+      context: ../advanca-worker
       dockerfile: Dockerfile
       target: worker
     image: advanca-worker:latest
