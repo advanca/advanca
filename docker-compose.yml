@@ -5,16 +5,16 @@ services:
       - 30333:30333
       - 9933:9933
       - 9944:9944
-    image: advanca/advanca-node:latest
+    image: advanca/advanca-node:0.1.0
     command:
       - --dev
       - --ws-external
   client:
-    image: advanca/advanca-client:latest
+    image: advanca/advanca-client:0.1.0
     command:
       - --ws-url=ws://node:9944
   worker:
-    image: advanca/advanca-worker:latest
+    image: advanca/advanca-worker:0.1.0
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
