@@ -41,6 +41,18 @@ To understand how Advanca works, read our [docs](docs/README.md).
 
 ## Roadmap
 
+### v0.2
+
+* [Advanca Worker v0.2](https://github.com/advanca/advanca-worker/releases/tag/v0.2.0)
+  * use Square-Root ORAM as storage backend
+
+* [Advanca Client v0.2](https://github.com/advanca/advanca-worker/releases/tag/v0.2.0)
+  * update demo usecase
+
+* [oram v0.1](https://github.com/advanca/oram/releases/tag/v0.1.0)
+  * Square-Root ORAM
+  * SGX Protected FS
+
 ### v0.1
 
 * [Advanca Node v0.1](https://github.com/advanca/advanca-node/releases/tag/v0.1.0)
