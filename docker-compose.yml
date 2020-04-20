@@ -10,11 +10,11 @@ services:
       - --dev
       - --ws-external
   client:
-    image: advanca/advanca-client:0.1.0
+    image: advanca/advanca-client:0.2.0
     command:
       - --ws-url=ws://node:9944
   worker:
-    image: advanca/advanca-worker:0.1.0
+    image: advanca/advanca-worker:0.2.0
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
