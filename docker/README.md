@@ -12,4 +12,4 @@ To build the image `advanca-node:latest`, `advanca-worker:latest`, `advanca-clie
 docker-compose build
 ```
 
-Then follow the [Getting Started](TODO) instructions to complete the testing workflow.
+Then follow the [Getting Started](../README.md#getting-started) instructions to complete the testing workflow.
