@@ -20,7 +20,7 @@ You can find the rust docs for the core module `advanca-core` [here](https://adv
 
 ### Advanca Worker
 
-[Advanca Worker](https://github.com/advanca/advanca-worker) is the implementation of the compute/storage plane where a trusted enclave is created for private task execution. The worker also provides APIs for the user to directly interact with the outsourced tasks.
+[Advanca Worker](https://github.com/advanca/advanca-worker) is the implementation of the compute/storage plane where a trusted enclave is created for private task execution. The worker also provides APIs for the user to directly interact with the outsourced tasks. It also has privacy-preserving storage capability, designed to conceal the data access pattern.
 
 #### API
 
@@ -28,15 +28,22 @@ Workers provide a set of APIs accessible to authenticated users, who are the own
 
 Currently, the definition of storage API can be found at [advanca-worker/protos/storage.proto](https://github.com/advanca/advanca-worker/blob/master/protos/storage.proto).
 
+#### ORAM
+
+[Obilivous RAM](https://en.wikipedia.org/wiki/Oblivious_RAM) (ORAM) is a mechanism to conceal the data access patterns that may reveal the actual intent of applications even data is encrypted. It is used in the worker to offer privacy-preserving storage capability, in addition to any encryption schemed used by the storage.
+
+We create a rust implemention (<https://github.com/advanca/oram>) that provides easy-to-use, key-value storage for applications running inside the enclave. It uses [Intel SGX Protected File System](https://software.intel.com/en-us/articles/overview-of-intel-protected-file-system-library-using-software-guard-extensions) as the storage backend for encrypted storage, and [Square-Root ORAM](https://oblivc.org/docs/sqoram.pdf) for hiding the access pattern.
+
+
 ## Deployment Example
 
 ### Single Node and Single Worker
 
-Here's the single-node, single-worker demo included in Advanca v0.1. The figure below presents the interaction sequences between programs and modules in the form of RPC calls, function calls, enclave trusted calls and events subscription, etc.
+Here's the single-node, single-worker demo included in [Advanca v0.2](https://github.com/advanca/advanca/releases/tag/v0.2.0). The figure below presents the interaction sequences between programs and modules in the form of RPC calls, function calls, enclave trusted calls and events subscription, etc.
 
 > Note: The diagram is simplified and may not reflect the latest implementation in the code.
 
-![image](images/workflow-v0.1.png)
+![image](images/workflow-v0.2.png)
 
 <p align="center"><i>Figure: Single-Node Single-Worker Workflow</i></p>
 
@@ -46,7 +53,7 @@ Three main parties are:
 * **advanca-node**: the consensus node providing control-plane core functions and states storage
 * **advanca-worker**: the resource provider with trusted hardware, where two componensts are selectively shown in the worflow:
   * **enclave**: the trusted execution environment processing the encrypted request
-  * **sealed-storage**: the sealed (or encrypted) storage stored outside of the enclave
+  * **oram-storage**: the oram storage stored outside of the enclave
 
 Now let's look at the workflow from different angles.
 
@@ -68,4 +75,4 @@ More details about task management are not covered here as the protocol is evolv
 
 The execution of the task begins when the worker accepts the task submitted previously by the user. In this particular example, the worker provides secure storage service, which allows direct user interaction in an end-to-end secure manner. And for simplicity, asymmetric encryption is used to encrypt the request by the user and the response by the enclave, however it can be switched to other mechanisms like standard TLS.
 
-Outside the enclave, the sealed storage is where the user data is stored. As per the design of the trusted hardware, disk storage is typically outside of the security perimeter. So the sealed storage upgrades the capacity of the secured data through a encrypted secure dump of the user data involved. It can be reloaded into the enclave anytime when the user needs to access it.
+Outside the enclave, the oram storage provides persistence, encryption and privacy. As per the threat model of the trusted execution technique, the storage is outside the security perimeter. Therefore, either a remote storage or local storage backed by disk is required. The oram storage offers privacy-preserving local storage capacity in the form of key-value pairs. The passive observer running in the same OS can neither see the content of the data (because of encryption), nor understand the real access pattern (because of ORAM).
