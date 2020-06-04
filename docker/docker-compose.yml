@@ -1,14 +1,18 @@
 # This is for development usage.
 version: '3.4'
 services:
+  aas:
+    build:
+      context: ../advanca-attestation-service
+      dockerfile: Dockerfile
+    volumes:
+      # Remember to place the files needed by aas into the `./aas-secrets` directory.
+      # Also, DO NOT commit those files into git.
+      - ./aas-secrets:/advanca:ro
   node:
     build:
       context: ../advanca-node
       dockerfile: Dockerfile
-    ports:
-      - 30333:30333
-      - 9933:9933
-      - 9944:9944
     image: advanca-node:latest
     command:
       - --dev

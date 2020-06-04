@@ -2,11 +2,11 @@
 
 This directory contains files for running advanca using locally built images.
 
-This is suitable for testing local changes in `advanca-node` or `advanca-worker` using docker.
+This is suitable for testing local changes using docker.
 
 ## Build and Test
 
-To build the image `advanca-node:latest`, `advanca-worker:latest`, `advanca-client:latest`
+To build the images `advanca-node:latest`, `advanca-worker:latest`, `advanca-client:latest` and `aas:latest`
 
 ```shell
 docker-compose build
