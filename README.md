@@ -67,7 +67,7 @@ To understand how Advanca works, read our [docs](docs/README.md).
   * add an [`attestee-client` example](https://github.com/advanca/advanca-attestation-service/tree/v0.1.0/examples/attestee-client)
   * add a service [gRPC protocol](https://github.com/advanca/advanca-attestation-service/blob/v0.1.0/aas-protos/protos/aas.proto)
 
-* [AESM Dockerfile](https://github.com/advanca/advanca/tree/v0.3.0/aesm/Dockerfile)
+* [AESM Dockerfile](https://github.com/advanca/advanca/tree/v0.3.0/aesm/)
   * build a container for Intel AESM service
   * published at Docker Hub [`advanca/aesm`](https://hub.docker.com/r/advanca/aesm)
 
