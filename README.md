@@ -8,7 +8,9 @@
 
 ## Getting Started
 
-To quickly see Advanca running, try it out with [Docker Compose](https://docs.docker.com/compose/install/) locally.
+To quickly see Advanca running, try it out with [Docker Compose](https://docs.docker.com/compose/install/) locally. 
+
+> **Note**: To run the following demo successfully, make sure your machine [supports SGX](TODO:needs link) and have [Intel SGX Linux Driver](ttps://github.com/intel/linux-sgx-driver/tree/sgx_driver_2.6#build-and-install-the-intelr-sgx-driver) installed. If not, you can try the previous [`v0.2.0`](https://github.com/advanca/advanca/tree/v0.2.0) version with SGX simulation mode. 
 
 ```
 git clone https://github.com/advanca/advanca.git
@@ -16,16 +18,22 @@ cd advanca
 docker-compose up --no-start
 ```
 
-Start the node first. It will run in the background.
+Start the `node` first. It will run in the background.
 
 ```
 docker-compose start node
 ```
 
-Bring up the worker and client. Logs will be printed. 
+Bring up the `worker`. Logs will be printed. 
 
 ```
-docker-compose up worker client
+docker-compose up worker
+```
+
+In a new terminal session, bring up the `client`.
+
+```
+docker-compose up client
 ```
 
 Finally, stop and clean up.
@@ -39,9 +47,19 @@ docker-compose rm
 
 To understand how Advanca works, read our [docs](docs/README.md).
 
-## Roadmap
+## Chaneglog
 
-### v0.2 (latest)
+### v0.3 (latest)
+
+* [Advanca Worker v0.3](https://github.com/advanca/advanca-worker/releases/tag/v0.3.0)
+
+* [Advanca Client v0.3](https://github.com/advanca/advanca-worker/releases/tag/v0.3.0)
+
+* [Advanca Attestation Service v0.1](https://github.com/advanca/advanca-attestation-service/tree/v0.1.0)
+
+* [Demo Documentation v0.3]()
+
+### v0.2
 
 * [Advanca Worker v0.2](https://github.com/advanca/advanca-worker/releases/tag/v0.2.0)
   * use Square-Root ORAM as storage backend
