@@ -28,6 +28,8 @@ services:
       - --dev
       - --ws-external
   client:
+    depends_on:
+      - node
     build:
       context: ../advanca-worker
       dockerfile: Dockerfile
@@ -36,6 +38,10 @@ services:
     command:
       - --ws-url=ws://node:9944
   worker:
+    depends_on:
+      - aesm
+      - aas
+      - node
     build:
       context: ../advanca-worker
       dockerfile: Dockerfile
