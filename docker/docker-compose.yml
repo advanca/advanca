@@ -31,6 +31,8 @@ services:
       dockerfile: Dockerfile
       target: worker
     image: advanca-worker:latest
+    devices:
+      - /dev/isgx:/dev/isgx
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
