@@ -1,2 +1,2 @@
-aas-secrets/
+aas-secrets/*
 !aas-secrets/README.md
