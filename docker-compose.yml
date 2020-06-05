@@ -26,8 +26,6 @@ services:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
       - --aas-url=aas-staging.advanca.network:11800
-    environment:
-      - "RUST_BACKTRACE=full"
     volumes:
       - aesm-socket:/var/run/aesmd
     devices:

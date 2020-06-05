@@ -4,7 +4,7 @@
 #
 # Instructions:
 #
-# 1. Make sure the following images are built
+# 1. Make sure the following images are built through `docker-compose build`
 #    - advanca-node:latest
 #    - advanca-worker:latest
 #    - advanca-client:latest
