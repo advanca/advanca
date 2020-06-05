@@ -15,6 +15,8 @@ services:
       context: ../advanca-attestation-service
       dockerfile: Dockerfile
     image: aas:latest
+    environment:
+      - "RUST_LOG=debug"
     volumes:
       # Remember to place the files needed by aas into the `./aas-secrets` directory.
       # Also, DO NOT commit those files into git.
