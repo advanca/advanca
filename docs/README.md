@@ -54,7 +54,7 @@ Here's the single-node, single-worker demo included in [Advanca v0.3](https://gi
 
 The main parties are:
 
-* **advanca-client**: the user who request encrypted stroage resource
+* **advanca-client**: the user who request encrypted storage resource
 * **advanca-node**: the consensus node providing control-plane core functions and states storage
 * **advanca-worker**: the resource provider with trusted hardware, where two componensts are selectively shown in the worflow:
   * **enclave**: the trusted execution environment processing the encrypted request
@@ -79,6 +79,6 @@ More details about task management are not covered here as the protocol is evolv
 
 #### Task Execution
 
-The execution of the task begins when the worker accepts the task submitted previously by the user. In this particular example, the worker provides secure storage service, which allows direct user interaction in an end-to-end secure manner. And for simplicity, asymmetric encryption is used to encrypt the request by the user and the response by the enclave, however it can be switched to other mechanisms like standard TLS.
+The execution of the task begins when the worker accepts the task submitted previously by the user. In this particular example, the worker provides secure storage service, which allows direct user interaction in an end-to-end secure manner. To ensure confidentiality and integrity of the messages between worker and user, a shared secret is derived between both parties which is used to derive symmetric keys used to encrypt the request by the user and the response by the enclave. This also provides perfect forward secrecy for the messages.
 
 Outside the enclave, the oram storage provides persistence, encryption and privacy. As per the threat model of the trusted execution technique, the storage is outside the security perimeter. Therefore, either a remote storage or local storage backed by disk is required. The oram storage offers privacy-preserving local storage capacity in the form of key-value pairs. The passive observer running in the same OS can neither see the content of the data (because of encryption), nor understand the real access pattern (because of ORAM).
