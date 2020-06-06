@@ -4,3 +4,6 @@
 [submodule "advanca-worker"]
 	path = advanca-worker
 	url = https://github.com/advanca/advanca-worker.git
+[submodule "advanca-attestation-service"]
+	path = advanca-attestation-service
+	url = https://github.com/advanca/advanca-attestation-service.git

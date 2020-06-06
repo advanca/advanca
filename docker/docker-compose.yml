@@ -1,19 +1,37 @@
 # This is for development usage.
 version: '3.4'
 services:
+  aesm:
+    build:
+      context: ../aesm
+      dockerfile: Dockerfile
+    image: aesm:latest
+    volumes:
+      - aesm-socket:/var/run/aesmd
+    devices:
+      - /dev/isgx:/dev/isgx
+  aas:
+    build:
+      context: ../advanca-attestation-service
+      dockerfile: Dockerfile
+    image: aas:latest
+    environment:
+      - "RUST_LOG=debug"
+    volumes:
+      # Remember to place the files needed by aas into the `./aas-secrets` directory.
+      # Also, DO NOT commit those files into git.
+      - ./aas-secrets:/advanca:ro
   node:
     build:
       context: ../advanca-node
       dockerfile: Dockerfile
-    ports:
-      - 30333:30333
-      - 9933:9933
-      - 9944:9944
     image: advanca-node:latest
     command:
       - --dev
       - --ws-external
   client:
+    depends_on:
+      - node
     build:
       context: ../advanca-worker
       dockerfile: Dockerfile
@@ -22,11 +40,25 @@ services:
     command:
       - --ws-url=ws://node:9944
   worker:
+    depends_on:
+      - aesm
+      - aas
+      - node
     build:
       context: ../advanca-worker
       dockerfile: Dockerfile
       target: worker
     image: advanca-worker:latest
+    devices:
+      - /dev/isgx:/dev/isgx
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
+      - --aas-url=aas:11800
+    volumes:
+      - aesm-socket:/var/run/aesmd
+    devices:
+      - /dev/isgx:/dev/isgx
+
+volumes:
+  aesm-socket:

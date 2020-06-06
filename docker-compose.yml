@@ -1,20 +1,35 @@
 version: '3.4'
 services:
+  aesm:
+    image: advanca/aesm:2.9.1
+    volumes:
+      - aesm-socket:/var/run/aesmd
+    devices:
+      - /dev/isgx:/dev/isgx
   node:
-    ports:
-      - 30333:30333
-      - 9933:9933
-      - 9944:9944
     image: advanca/advanca-node:0.1.0
     command:
       - --dev
       - --ws-external
   client:
-    image: advanca/advanca-client:0.2.0
+    depends_on:
+      - node
+    image: advanca/advanca-client:0.3.0
     command:
       - --ws-url=ws://node:9944
   worker:
-    image: advanca/advanca-worker:0.2.0
+    depends_on:
+      - aesm
+      - node
+    image: advanca/advanca-worker:0.3.0
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
+      - --aas-url=aas-staging.advanca.network:11800
+    volumes:
+      - aesm-socket:/var/run/aesmd
+    devices:
+      - /dev/isgx:/dev/isgx
+
+volumes:
+  aesm-socket:

@@ -34,45 +34,51 @@ Currently, the definition of storage API can be found at [advanca-worker/protos/
 
 We create a rust implemention (<https://github.com/advanca/oram>) that provides easy-to-use, key-value storage for applications running inside the enclave. It uses [Intel SGX Protected File System](https://software.intel.com/en-us/articles/overview-of-intel-protected-file-system-library-using-software-guard-extensions) as the storage backend for encrypted storage, and [Square-Root ORAM](https://oblivc.org/docs/sqoram.pdf) for hiding the access pattern.
 
+### Advanca Attestation Service
+
+Advanca Attestation Service is a remote attestation service provided for any worker who wants to join the compute or storage plane in Advanca. Read more about it in the [attestation documentation](./attestation.md) or check the [source code repository](https://github.com/advanca/advanca-attestation-service).
+
+Currently, we are hosting AAS for the workers. It's also possible for others who have subscribed to Intel Attestation Service to host similar services using the open-sourced implementation. However, as the project is under active development, the attestation protocol is subject to changes.
 
 ## Deployment Example
 
 ### Single Node and Single Worker
 
-Here's the single-node, single-worker demo included in [Advanca v0.2](https://github.com/advanca/advanca/releases/tag/v0.2.0). The figure below presents the interaction sequences between programs and modules in the form of RPC calls, function calls, enclave trusted calls and events subscription, etc.
+Here's the single-node, single-worker demo included in [Advanca v0.3](https://github.com/advanca/advanca/releases/tag/v0.3.0). The figure below presents the interaction sequences between programs and modules in the form of RPC calls, function calls, enclave trusted calls and events subscription, etc.
 
 > Note: The diagram is simplified and may not reflect the latest implementation in the code.
 
-![image](images/workflow-v0.2.png)
+![image](images/workflow-v0.3.png)
 
 <p align="center"><i>Figure: Single-Node Single-Worker Workflow</i></p>
 
-Three main parties are:
+The main parties are:
 
-* **advanca-client**: the user who request encrypted stroage resource
+* **advanca-client**: the user who request encrypted storage resource
 * **advanca-node**: the consensus node providing control-plane core functions and states storage
 * **advanca-worker**: the resource provider with trusted hardware, where two componensts are selectively shown in the worflow:
   * **enclave**: the trusted execution environment processing the encrypted request
   * **oram-storage**: the oram storage stored outside of the enclave
+* **advanca-attestation-service**: the deputy attestaion service provider from Advanca
 
-Now let's look at the workflow from different angles.
+Now let's look at the workflow from different aspects.
 
 #### Registration
 
 At the beginning, the `advanca-node` manages no user and workers, nor any tasks. Users and workers need to make the registration with the signle-node chain and lock some fund as the deposit. This is done by submitting a signed extrisinic using the registration functions.
 
-The worker registration involves some preparation beforehand, and this is where it differs from user registration. As a worker with trusted hardware, remote attestation will be done first with official authorities. As a result, the attestation report will be made public for anyone to verify its claim, i.e. a trusted environment. In Advanca, this report is stored on chain as part of the registration.
+The worker registration involves some preparation beforehand, and this is where it differs from user registration. As a worker with trusted hardware, remote attestation (See more in our [attestation documentation](./attestation.md)) will be done first with Advanca Attestation Service. As a result, the attestation report will be made public for anyone to verify its claim, i.e. a trusted environment. In Advanca, this report is stored on chain as part of the registration.
 
 #### Task Management
 
 The tasks are compute and storage resource request created by users. `advanca-node` manages task metadata and lifecycle information on chain to maintain the transparency. Users submit tasks to the chain, and workers accept the task and start the task execution. Users and workers, like customers and providers, will start the engagement first through the chain, before they talk to the other side for the task details.
 
-Not all task information stored on chain are publicly viewable. For example, the worker's service endpoint `worker_url` is stored as ciphertext encrpyted by the task owner's public key when the worker accepts a task. It provides certain protection for the worker and more protections like this come in the future.
+Not all task information stored on chain are publicly viewable. For example, the worker's service endpoint `worker_url` is stored as ciphertext encrpyted by the derived secret (only known to the enclave and the user) when the worker's enclave accepts a task. It provides certain protection for the worker and more protections like this come in the future.
 
 More details about task management are not covered here as the protocol is evolving rapidly. Keep an eye on the `advanca-core` module in our `advanca-code` repository.
 
 #### Task Execution
 
-The execution of the task begins when the worker accepts the task submitted previously by the user. In this particular example, the worker provides secure storage service, which allows direct user interaction in an end-to-end secure manner. And for simplicity, asymmetric encryption is used to encrypt the request by the user and the response by the enclave, however it can be switched to other mechanisms like standard TLS.
+The execution of the task begins when the worker accepts the task submitted previously by the user. In this particular example, the worker provides secure storage service, which allows direct user interaction in an end-to-end secure manner. To ensure confidentiality and integrity of the messages between worker and user, a shared secret is derived between both parties which is used to derive symmetric keys used to encrypt the request by the user and the response by the enclave. This also provides perfect forward secrecy for the messages.
 
 Outside the enclave, the oram storage provides persistence, encryption and privacy. As per the threat model of the trusted execution technique, the storage is outside the security perimeter. Therefore, either a remote storage or local storage backed by disk is required. The oram storage offers privacy-preserving local storage capacity in the form of key-value pairs. The passive observer running in the same OS can neither see the content of the data (because of encryption), nor understand the real access pattern (because of ORAM).
