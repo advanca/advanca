@@ -47,7 +47,7 @@ docker-compose rm
 
 To understand how Advanca works, read our [docs](docs/README.md).
 
-## Chaneglog
+## Changelog
 
 ### v0.3 (latest)
 
