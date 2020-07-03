@@ -49,7 +49,31 @@ To understand how Advanca works, read our [docs](docs/README.md).
 
 ## Changelog
 
-### v0.3 (latest)
+### v0.4 (latest)
+* [Advanca Worker v0.4](https://github.com/advanca/advanca-worker/releases/tag/v0.4.0)
+  * reference implementation for trusted resource accounting
+  * crypto operations for trusted, non-trusted domains unified in [advanca-sgx-helper `v0.3.0`](https://github.com/advanca/advanca-sgx-helper/tree/v0.3.0).
+  * updated grpcio-rust to v0.5.1, uses futures 0.3 instead of 0.1
+
+* [Advanca Node v0.3](https://github.com/advanca/advanca-sgx-helper/tree/v0.3.0)
+  * extend Task to include task-specific user and worker signed pubkeys
+  * extend Task to include task evidence for worker
+  * adds new Task state, Done
+  * Tasks are no longer removed from chain after abort/completion
+
+* [Advanca Attestation Service v0.2.1](https://github.com/advanca/advanca-attestation-service/tree/v0.2.1)
+  * add trusted time service
+  * updated grpcio-rust to v0.5.1, uses futures 0.3 instead of 0.1
+  * restructured how protobuf is being defined for both trusted and untrusted domains enabling unified usage
+
+* [Advanca SGX Helper v0.3](https://github.com/advanca/advanca-sgx-helper/tree/v0.3.0)
+  * unified crypto operations for both trusted(enclave) and untrusted(app) domains
+  * utilize Intel's crypto library
+  * adds data structure for accounting service(AliveEvidence)
+
+* [Demo Documentation v0.4](https://github.com/advanca/advanca/tree/v0.4.0/docs#single-node-and-single-worker)
+
+### v0.3 
 
 * [Advanca Worker v0.3](https://github.com/advanca/advanca-worker/releases/tag/v0.3.0)
 
