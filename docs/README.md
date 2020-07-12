@@ -48,11 +48,11 @@ Currently, we are hosting AAS for the workers. It's also possible for others who
 
 ### Single Node and Single Worker
 
-Here's the single-node, single-worker demo included in [Advanca v0.3](https://github.com/advanca/advanca/releases/tag/v0.3.0). The figure below presents the interaction sequences between programs and modules in the form of RPC calls, function calls, enclave trusted calls and events subscription, etc.
+Here's the single-node, single-worker demo included in [Advanca v0.4](https://github.com/advanca/advanca/releases/tag/v0.4.0). The figure below presents the interaction sequences between programs and modules in the form of RPC calls, function calls, enclave trusted calls and events subscription, etc.
 
 > Note: The diagram is simplified and may not reflect the latest implementation in the code.
 
-![image](images/workflow-v0.3.png)
+![image](images/workflow-v0.4.svg)
 
 <p align="center"><i>Figure: Single-Node Single-Worker Workflow</i></p>
 
