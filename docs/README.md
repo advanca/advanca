@@ -34,6 +34,10 @@ Currently, the definition of storage API can be found at [advanca-worker/protos/
 
 We create a rust implemention (<https://github.com/advanca/oram>) that provides easy-to-use, key-value storage for applications running inside the enclave. It uses [Intel SGX Protected File System](https://software.intel.com/en-us/articles/overview-of-intel-protected-file-system-library-using-software-guard-extensions) as the storage backend for encrypted storage, and [Square-Root ORAM](https://oblivc.org/docs/sqoram.pdf) for hiding the access pattern.
 
+#### Accounting Service
+
+There is currently a reference implementation on how accounting of resources can be done on the enclave. For more details, please refer to the [accounting writeup](./accounting.md).
+
 ### Advanca Attestation Service
 
 Advanca Attestation Service is a remote attestation service provided for any worker who wants to join the compute or storage plane in Advanca. Read more about it in the [attestation documentation](./attestation.md) or check the [source code repository](https://github.com/advanca/advanca-attestation-service).
