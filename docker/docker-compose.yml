@@ -21,6 +21,8 @@ services:
       # Remember to place the files needed by aas into the `./aas-secrets` directory.
       # Also, DO NOT commit those files into git.
       - ./aas-secrets:/advanca:ro
+    command:
+      - --conditional-secure
   node:
     build:
       context: ../advanca-node
@@ -41,16 +43,14 @@ services:
       - --ws-url=ws://node:9944
   worker:
     depends_on:
-      - aesm
       - aas
+      - aesm
       - node
     build:
       context: ../advanca-worker
       dockerfile: Dockerfile
       target: worker
     image: advanca-worker:latest
-    devices:
-      - /dev/isgx:/dev/isgx
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
