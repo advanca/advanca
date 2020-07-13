@@ -14,13 +14,16 @@ RUN apt-get update && apt-get install -y dkms gnupg2 apt-transport-https softwar
         libsgx-uae-service=$PSW_PKG_VERSION \
         libsgx-urts=$PSW_PKG_VERSION
 
-RUN mkdir -p /var/run/aesmd/ && chown -R aesmd:aesmd /var/run/aesmd/ && chmod 0755 /var/run/aesmd/
 
 USER aesmd
 WORKDIR /opt/intel/sgx-aesm-service/aesm
 
 ENV LD_LIBRARY_PATH=/opt/intel/sgx-aesm-service/aesm
+ENV AESM_PATH=/opt/intel/sgx-aesm-service/aesm
 
 VOLUME /var/run/aesmd
 
-CMD ./aesm_service --no-daemon
+CMD /opt/intel/sgx-aesm-service/aesm/linksgx.sh && \
+	mkdir -p /var/run/aesmd/ && chown -R aesmd:aesmd /var/run/aesmd/ && chmod 0755 /var/run/aesmd/ && \
+	chown -R aesmd:aesmd /var/opt/aesmd/ && chmod 0750 /var/opt/aesmd/ && \
+	./aesm_service --no-daemon
