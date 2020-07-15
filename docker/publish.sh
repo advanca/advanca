@@ -15,10 +15,10 @@
 # 3. Make sure you have the write access to docker hub and execute the script
 
 # NOTE: remember to modify the version tags before publishing
-node_version=0.1.0
-worker_version=0.3.0
-client_version=0.3.0
-aas_version=0.1.0
+node_version=0.2.0
+worker_version=0.4.0
+client_version=0.4.0
+aas_version=0.2.0
 aesm_version=2.9.1
 
 docker tag advanca-node:latest advanca/advanca-node:latest
