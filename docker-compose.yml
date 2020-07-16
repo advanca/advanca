@@ -25,7 +25,7 @@ services:
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
-      - --aas-url=aas-staging.advanca.network:11800
+      - --aas-url=aas-v020.advanca.network:11800
     volumes:
       - aesm-socket:/var/run/aesmd
     devices:
