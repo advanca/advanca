@@ -54,7 +54,7 @@ To understand how Advanca works, read our [docs](docs/README.md).
   * reference implementation for trusted resource accounting
   * crypto operations for trusted, non-trusted domains unified in [advanca-sgx-helper `v0.3.0`](https://github.com/advanca/advanca-sgx-helper/tree/v0.3.0).
   * updated grpcio-rust to v0.5.1, uses futures 0.3 instead of 0.1
-  * accounting service writeup (https://github.com/advanca/advanca/blob/release-0.4.0/docs/accounting.md)
+  * [accounting service writeup](https://github.com/advanca/advanca/blob/release-0.4.0/docs/accounting.md)
 
 * [Advanca Node v0.3](https://github.com/advanca/advanca-sgx-helper/tree/v0.3.0)
   * extend Task to include task-specific user and worker signed pubkeys
