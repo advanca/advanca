@@ -6,7 +6,8 @@ The design of the accounting service for Advanca is aimed at providing an accura
 
 * There is no trusted time service within Intel SGX enclaves
 * There is no trusted way to measure elapsed time or cpu cycles in SGX1
-  * RDTSC is available in SGX2There is no trusted IO available for the enclave
+* RDTSC is available in SGX2
+* There is no trusted IO available for the enclave
 
 **Accounting information which we are interested in:**
 
