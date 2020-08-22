@@ -49,14 +49,44 @@ To understand how Advanca works, read our [docs](docs/README.md).
 
 ## Changelog
 
-### v0.4 (latest)
+### v0.5 (latest)
+
+* [Advanca Worker v0.5](https://github.com/advanca/advanca-worker/releases/tag/v0.5.0)
+  * update to substrate v2.0.0-rc5
+  * swap to serde_json from serde_cbor
+  * add sr25519 support in enclave
+  * import types from crate `advanca-node-primitives` in [advanca/advanca-node](https://github.com/advanca/advanca-node)
+  * support payment upon task completion
+  * `substrate-api` v0.3.0
+    * replace the internal API client implementation from [advanca/substrate-api-client](https://github.com/advanca/substrate-api-client) to [advanca/substrate-subxt](https://github.com/advanca/substrate-subxt)
+    * support substrate v2.0.0-rc5
+    * new API `complete_task`, `get_balance` and `listen_for_task_completed`.
+
+* [Advanca Node v0.4](https://github.com/advanca/advanca-node/tree/v0.4.0)
+  * update to substrate v2.0.0-rc5
+  * add CI for unit test using Github actions
+  * separate runtime types into a standalone crate `advanca-node-primitives` 
+  * support payment upon task completion
+  * add verification of the alive evidence submitted by worker
+
+* [Advanca Attestation Service v0.3](https://github.com/advanca/advanca-attestation-service/tree/v0.3.0)
+  * change the serialization from `serde_cbor` to `serde_json`
+  * use `advanca/advanca-sgx-helper` v0.4.0
+
+* [Advanca SGX Helper v0.4](https://github.com/advanca/advanca-sgx-helper/tree/v0.4.0)
+  * support sr25519
+  * clean up `Cargo.toml` and update package-level features
+
+* [Demo Documentation v0.5](https://github.com/advanca/advanca/tree/v0.5.0/docs#single-node-and-single-worker)
+
+### v0.4
 * [Advanca Worker v0.4](https://github.com/advanca/advanca-worker/releases/tag/v0.4.0)
   * reference implementation for trusted resource accounting
   * crypto operations for trusted, non-trusted domains unified in [advanca-sgx-helper `v0.3.0`](https://github.com/advanca/advanca-sgx-helper/tree/v0.3.0).
   * updated grpcio-rust to v0.5.1, uses futures 0.3 instead of 0.1
   * [accounting service writeup](https://github.com/advanca/advanca/blob/release-0.4.0/docs/accounting.md)
 
-* [Advanca Node v0.3](https://github.com/advanca/advanca-sgx-helper/tree/v0.3.0)
+* [Advanca Node v0.2](https://github.com/advanca/advanca-node/tree/v0.2.0)
   * extend Task to include task-specific user and worker signed pubkeys
   * extend Task to include task evidence for worker
   * adds new Task state, Done

@@ -7,25 +7,25 @@ services:
     devices:
       - /dev/isgx:/dev/isgx
   node:
-    image: advanca/advanca-node:0.2.0
+    image: advanca/advanca-node:0.4.0
     command:
       - --dev
       - --ws-external
   client:
     depends_on:
       - node
-    image: advanca/advanca-client:0.4.0
+    image: advanca/advanca-client:0.5.0
     command:
       - --ws-url=ws://node:9944
   worker:
     depends_on:
       - aesm
       - node
-    image: advanca/advanca-worker:0.4.0
+    image: advanca/advanca-worker:0.5.0
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
-      - --aas-url=aas-v020.advanca.network:11800
+      - --aas-url=aas-v030.advanca.network:11800
     volumes:
       - aesm-socket:/var/run/aesmd
     devices:
