@@ -51,6 +51,15 @@ To understand how Advanca works, read our [docs](docs/README.md).
 
 ### v0.5 (latest)
 
+#### v0.5.1
+
+* [Advanca Worker v0.5.1](https://github.com/advanca/advanca-worker/releases/tag/v0.5.1)
+  * add tampering demo
+  * add compute weight to demo
+  * refactor accounting to make demo clearer
+
+#### v0.5.0
+
 * [Advanca Worker v0.5](https://github.com/advanca/advanca-worker/releases/tag/v0.5.0)
   * update to substrate v2.0.0-rc5
   * swap to serde_json from serde_cbor
