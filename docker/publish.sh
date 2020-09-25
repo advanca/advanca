@@ -16,8 +16,8 @@
 
 # NOTE: remember to modify the version tags before publishing
 node_version=0.4.0
-worker_version=0.5.0
-client_version=0.5.0
+worker_version=0.5.2
+client_version=0.5.2
 aas_version=0.3.0
 aesm_version=2.9.1
 

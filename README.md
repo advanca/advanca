@@ -51,6 +51,18 @@ To understand how Advanca works, read our [docs](docs/README.md).
 
 ### v0.5 (latest)
 
+#### v0.5.1
+
+* [Advanca Worker v0.5.2](https://github.com/advanca/advanca-worker/releases/tag/v0.5.1)
+  * add tampering demo
+  * add leak demo
+  * add compute weight to demo
+  * refactor accounting to make demo clearer
+
+* [Security Design Review](https://github.com/advanca/advanca/blob/v0.5.1/docs/security.md)
+
+#### v0.5.0
+
 * [Advanca Worker v0.5](https://github.com/advanca/advanca-worker/releases/tag/v0.5.0)
   * update to substrate v2.0.0-rc5
   * swap to serde_json from serde_cbor
@@ -80,6 +92,7 @@ To understand how Advanca works, read our [docs](docs/README.md).
 * [Demo Documentation v0.5](https://github.com/advanca/advanca/tree/v0.5.0/docs#single-node-and-single-worker)
 
 ### v0.4
+
 * [Advanca Worker v0.4](https://github.com/advanca/advanca-worker/releases/tag/v0.4.0)
   * reference implementation for trusted resource accounting
   * crypto operations for trusted, non-trusted domains unified in [advanca-sgx-helper `v0.3.0`](https://github.com/advanca/advanca-sgx-helper/tree/v0.3.0).

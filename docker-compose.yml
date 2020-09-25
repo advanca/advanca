@@ -14,14 +14,14 @@ services:
   client:
     depends_on:
       - node
-    image: advanca/advanca-client:0.5.0
+    image: advanca/advanca-client:0.5.2
     command:
       - --ws-url=ws://node:9944
   worker:
     depends_on:
       - aesm
       - node
-    image: advanca/advanca-worker:0.5.0
+    image: advanca/advanca-worker:0.5.2
     command:
       - --grpc-external-url=worker:12345
       - --ws-url=ws://node:9944
