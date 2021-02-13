@@ -1,3 +1,8 @@
+# Advanca is now [Automata](https://ata.network).
+
+The development is moved to https://github.com/automata-network/automata. Come and join us there!
+
+----------
 <h1>Advanca <span><a href="https://web3.foundation/grants/"><img align="right" src="docs/images/web3-grants-badge.png" alt="web3-grant3-badge" width="115px"/></a></span></h1>
 
 <p align="center">
